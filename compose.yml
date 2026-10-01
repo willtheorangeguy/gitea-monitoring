@@ -1,0 +1,23 @@
+
+services:
+  gitea-domain-exporter:
+    build: .
+    restart: unless-stopped
+    environment:
+      GITEA_URL: ${GITEA_URL:-http://gitea:3000}
+      GITEA_TOKEN_FILE: /run/secrets/gitea_api_token
+      EXPORTER_BEARER_TOKEN_FILE: /run/secrets/exporter_bearer_token
+      POLL_INTERVAL_SECONDS: ${POLL_INTERVAL_SECONDS:-300}
+    volumes:
+      - ./secrets/gitea-api-token:/run/secrets/gitea_api_token:ro
+      - ./secrets/metrics-token:/run/secrets/exporter_bearer_token:ro
+    ports:
+      - "${BIND_IP:-127.0.0.1}:9178:9178"
+    networks: [gitea]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+networks:
+  gitea:
+    external: true
+    name: ${GITEA_NETWORK:-gitea_default}

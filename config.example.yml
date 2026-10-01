@@ -1,0 +1,8 @@
+environment:
+  GITEA_URL: http://server:3000
+  GITEA_TOKEN_FILE: /run/secrets/gitea_api_token
+  EXPORTER_BEARER_TOKEN_FILE: /run/secrets/exporter_bearer_token
+  POLL_INTERVAL_SECONDS: "300"
+  REQUEST_TIMEOUT_SECONDS: "30"
+  LISTEN_ADDRESS: 0.0.0.0
+  LISTEN_PORT: "9178"

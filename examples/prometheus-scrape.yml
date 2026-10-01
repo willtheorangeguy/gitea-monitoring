@@ -1,0 +1,15 @@
+# Add these entries under scrape_configs in prometheus.yml. Replace example hosts and token paths.
+- job_name: gitea-domain
+  metrics_path: /metrics
+  authorization:
+    type: Bearer
+    credentials_file: /etc/prometheus/secrets/gitea-exporter.token
+  static_configs:
+    - targets: [gitea-exporter.example:9178]
+- job_name: gitea-native
+  metrics_path: /metrics
+  authorization:
+    type: Bearer
+    credentials_file: /etc/prometheus/secrets/gitea-native.token
+  static_configs:
+    - targets: [gitea.example:3000]
