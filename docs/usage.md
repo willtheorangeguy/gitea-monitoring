@@ -1,17 +1,17 @@
-# gitea-monitoring — Dashboard Usage
+# Dashboard usage
 
-Import the JSON files using **Grafana → Dashboards → New → Import**. Set the data source and variables listed in [configuration](./configuration.md).
+Import the JSON files using **Grafana → Dashboards → New → Import**. Set the data source and variables listed in [configuration](configuration.md).
 
 ## Gitea Application Overview
 
-Source: [gitea-application.json](../dashboards/gitea-application.json). Refresh: `30s`.
+Source: [`dashboards/gitea-application.json`](https://github.com/willtheorangeguy/gitea-monitoring/blob/HEAD/dashboards/gitea-application.json). Refresh: `30s`.
 
 <!-- Screenshot: after adding gitea-application.png to .github/icons/gitea-monitoring/, replace this comment with ![Gitea Application Overview](https://raw.githubusercontent.com/willtheorangeguy/.github/main/icons/gitea-monitoring/gitea-application.png). -->
 
 ### Panels
 
 | Panel | Type | What it shows |
-|---|---|---|
+| --- | --- | --- |
 | Service Health | stat | Both the native Gitea scrape and read-only domain exporter must be healthy. |
 | Repositories | stat | Authoritative repository total returned by Gitea's administrative repository search API. |
 | Open Issues | stat | Open issues reported by Gitea, excluding pull requests. |

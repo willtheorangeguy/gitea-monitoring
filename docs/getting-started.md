@@ -1,4 +1,4 @@
-# gitea-monitoring — Quickstart
+# Getting started
 
 ## Prerequisites
 
@@ -13,4 +13,4 @@ The example Prometheus scrape job names are `gitea-domain`, `gitea-native`.
 ## Confirm data
 
 In Prometheus, check `up{job="gitea-domain"}`, `up{job="gitea-native"}` and inspect a panel query in Grafana.
-For missing data, see [troubleshooting](./troubleshooting.md).
+For missing data, see [Troubleshooting](troubleshooting.md).

@@ -1,14 +1,41 @@
-# gitea-monitoring — Architecture
+# Architecture
 
-Gitea API -> read-only Python exporter -> authenticated /metrics -> Prometheus. Gitea native /metrics is scraped separately. Both feed the Grafana dashboard.
+This project connects its data source to its Grafana dashboard through the components shown below.
+
+## Overview
+
+This diagram shows the data path for this project.
+
+```mermaid
+graph LR
+  A[Gitea API] -->|polled by| B[Domain exporter]
+  C[Gitea native metrics] -->|scraped by| D[Prometheus]
+  B -->|exposes metrics to| D
+  D -->|queried by| E[Grafana dashboard]
+```
 
 ## Components
 
-- [compose.yml](../compose.yml): container deployment
-- [dashboards/](../dashboards): Grafana dashboard definitions
-- [examples/](../examples): deployment and scrape examples
-- [src/](../src): collector or proxy implementation
+### Data source
 
-## Data interpretation
+Gitea API -> Python exporter -> authenticated /metrics -> Prometheus -> Grafana; native Gitea metrics use a separate scrape.
 
-API collection runs on a timer; the exporter exposes last success and failure metrics. Native and domain scrapes should share the same instance label for dashboard panels that compare them.
+### Dashboard
+
+`dashboards/gitea-application.json` contains the Grafana dashboard definition.
+
+## Data flow
+
+Gitea API -> Python exporter -> authenticated /metrics -> Prometheus -> Grafana; native Gitea metrics use a separate scrape. Grafana evaluates dashboard queries against the selected data source and label values.
+
+## Directory layout
+
+```text
+.
+├── dashboards/  Grafana dashboard JSON files
+├── src/  Python services and collectors
+├── tests/  Automated unit tests
+├── examples/  Scrape and deployment examples
+├── docs/        Documentation source
+└── README.md    Project overview and quick links
+```
