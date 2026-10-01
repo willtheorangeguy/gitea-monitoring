@@ -6,6 +6,7 @@
     credentials_file: /etc/prometheus/secrets/gitea-exporter.token
   static_configs:
     - targets: [gitea-exporter.example:9178]
+      labels: {instance: gitea}
 - job_name: gitea-native
   metrics_path: /metrics
   authorization:
@@ -13,3 +14,4 @@
     credentials_file: /etc/prometheus/secrets/gitea-native.token
   static_configs:
     - targets: [gitea.example:3000]
+      labels: {instance: gitea}

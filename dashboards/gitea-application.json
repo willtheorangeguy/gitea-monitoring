@@ -97,7 +97,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "min(up{job=~\"gitea-(native|domain)\",instance=\"$instance\"})",
+          "expr": "(min(up{job=\"${job_gitea_domain}\",instance=\"$instance\"}) or vector(0)) * (min(up{job=\"${job_gitea_native}\",instance=\"$instance\"}) or vector(0))",
           "format": "time_series",
           "instant": true,
           "interval": "",
